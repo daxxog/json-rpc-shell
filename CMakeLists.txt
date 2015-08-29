@@ -22,15 +22,18 @@ set (CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake)
 # Dependencies
 find_package (Curses)
 find_package (PkgConfig REQUIRED)
-pkg_check_modules (dependencies REQUIRED libcurl jansson)
+pkg_check_modules (dependencies REQUIRED libcurl)
 pkg_check_modules (libssl REQUIRED libssl libcrypto)
 find_package (LibEV REQUIRED)
+find_package (Jansson REQUIRED)
+find_package (Iconv REQUIRED)
+find_package (Readline REQUIRED)
 pkg_check_modules (ncursesw ncursesw)
 
 set (project_libraries ${dependencies_LIBRARIES}
-	${libssl_LIBRARIES} ${LIBEV_LIBRARIES} readline)
+	${libssl_LIBRARIES} ${LIBEV_LIBRARIES} ${READLINE_LIBRARIES} ${ICONV_LIBRARIES} ${JANSSON_LIBRARIES})
 include_directories (${dependencies_INCLUDE_DIRS}
-	${libssl_INCLUDE_DIRS} ${LIBEV_INCLUDE_DIRS})
+	${libssl_INCLUDE_DIRS} ${LIBEV_INCLUDE_DIRS} ${READLINE_INCLUDE_DIRS} ${ICONV_INCLUDE_DIR} ${JANSSON_INCLUDE_DIRS})
 
 if (ncursesw_FOUND)
 	list (APPEND project_libraries ${ncursesw_LIBRARIES})

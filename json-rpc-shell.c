@@ -38,6 +38,9 @@
 #define LIBERTY_WANT_PROTO_HTTP
 #define LIBERTY_WANT_PROTO_WS
 
+//osx SIGWINCH fix
+#define _DARWIN_C_SOURCE 1
+
 #include "config.h"
 #include "liberty/liberty.c"
 #include "http-parser/http_parser.h"
